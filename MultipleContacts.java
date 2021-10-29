@@ -1,8 +1,8 @@
 package com.bridgelabz.addressbookstreams;
-//Uc9
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.function.Predicate;
+//Uc7
 public class MultipleContacts {
 	ArrayList<Contacts> contactArrayList;
 	Scanner scanner;
