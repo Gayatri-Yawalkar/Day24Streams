@@ -1,5 +1,5 @@
 package com.bridgelabz.addressbookstreams;
-//Uc8
+//Uc9
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.function.Predicate;
@@ -22,25 +22,27 @@ public class MultipleContacts {
 		return scanner.nextInt();
 	}
 	Predicate<Contacts> isDuplicate=c->c.firstLastName.equalsIgnoreCase(firstName);
-	public void addContact() {
+	public Contacts addContact() {
 		System.out.println("Enter Below Details to create new Contact");
 		System.out.println("Enter Full Name");
 		firstName=scanner.nextLine();
+		Contacts c=null;
 		if(contactArrayList.size()>0) {
 			boolean check=contactArrayList.stream()
 						  .anyMatch(isDuplicate);
 			if(check) {
 				System.out.println("You Already have this contacts in address book");
 			} else {
-				Contacts c=getUserInput(firstName);
+				c=getUserInput(firstName);
 				contactArrayList.add(c);
 				System.out.println("Contact is Successfully Added to AddressBook");
 			}
 		} else {
-			Contacts c=getUserInput(firstName);
+			c=getUserInput(firstName);
 			contactArrayList.add(c);
 			System.out.println("Contact is Successfully Added to AddressBook");
 		}
+		return c;
 	}
 	public Contacts getUserInput(String firstLastName) {
 		System.out.println("Enter Address");
