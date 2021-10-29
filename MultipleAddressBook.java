@@ -1,5 +1,5 @@
 package com.bridgelabz.addressbookstreams;
-//Uc7
+//Uc8
 import java.awt.List;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +22,9 @@ public class MultipleAddressBook {
 		System.out.println("1.Add new Address Book");
 		System.out.println("2.View Address Book List");
 		System.out.println("3.Select Address Book to View Contact Details");
-		System.out.println("4.Quit");
+		System.out.println("4.Search Person By City");
+		System.out.println("5.Search Person By State");
+		System.out.println("6.Quit");
 		System.out.println("Enter choice from 1 and 6");
 		int choice=sc.nextInt();
 		return choice;
@@ -49,6 +51,35 @@ public class MultipleAddressBook {
 			}
 		}
 	}
+	public void searchContactByCityName() {
+		System.out.println("Enter name of City to search contact");
+		String city=sc.next();
+		city=city.toLowerCase();
+		if(addressBookMap.containsKey(city)) {
+			MultipleContacts list=addressBookMap.get(city);
+			list.showAllContacts();
+		}
+	}
+	Predicate<Contacts> search=c->c.state.equalsIgnoreCase(states);
+	public void searchContactByStateName() {
+		System.out.println("Enter name of State to search contact");
+		states=sc.next();
+		states=states.toLowerCase();
+		MultipleContacts nc=new MultipleContacts();
+		for(Map.Entry<String,MultipleContacts> m:addressBookMap.entrySet()) {
+			if(m.getValue().contactArrayList.size()>0) {
+				ArrayList<Contacts> stateWiseList=(ArrayList<Contacts>) m.getValue().contactArrayList.stream()
+						  	  					   .filter(search)
+						  	  					   .collect(Collectors.toList());
+				Iterator<Contacts> i=stateWiseList.iterator();
+				while(i.hasNext()) {
+					Contacts c=(Contacts) i.next();
+					nc.contactArrayList.add(c);
+				}
+			}
+		}
+		nc.showAllContacts();
+	}
 	public static void main(String[] args) {
 		MultipleAddressBook mab=new MultipleAddressBook();
 		int choice;
@@ -66,10 +97,16 @@ public class MultipleAddressBook {
 					mab.selectAddressBook();
 					break;
 				case 4:
+					mab.searchContactByCityName();
+					break;
+				case 5:
+					mab.searchContactByStateName();
+					break;
+				case 6:
 					flag=1;
 					break;
 				default:
-					System.out.println("You have Entered Wrong Choice.Please enter option between 1 to 4");
+					System.out.println("You have Entered Wrong Choice.Please enter option between 1 to 6");
 			}
 		}
 	}

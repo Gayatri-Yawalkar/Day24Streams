@@ -1,13 +1,12 @@
 package com.bridgelabz.addressbookstreams;
+//Uc8
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.function.Predicate;
-//Uc7
 public class MultipleContacts {
 	ArrayList<Contacts> contactArrayList;
 	Scanner scanner;
 	String firstName;
-	Predicate<Contacts> isDuplicate=c->c.firstLastName.equalsIgnoreCase(firstName);
 	public MultipleContacts() {
 		contactArrayList=new ArrayList<>();
 		scanner=new Scanner(System.in);
@@ -22,13 +21,14 @@ public class MultipleContacts {
 		System.out.println("Enter Your Choice from 1 to 6");
 		return scanner.nextInt();
 	}
+	Predicate<Contacts> isDuplicate=c->c.firstLastName.equalsIgnoreCase(firstName);
 	public void addContact() {
 		System.out.println("Enter Below Details to create new Contact");
 		System.out.println("Enter Full Name");
 		firstName=scanner.nextLine();
 		if(contactArrayList.size()>0) {
 			boolean check=contactArrayList.stream()
-				        .anyMatch(isDuplicate);
+						  .anyMatch(isDuplicate);
 			if(check) {
 				System.out.println("You Already have this contacts in address book");
 			} else {
@@ -185,5 +185,11 @@ public class MultipleContacts {
 					System.out.println("You have Entered Wrong Choice.Please enter option between 1 to 6");
 			}
 		}
+	}
+	public static void main(String[] args) {
+		MultipleContacts ob=new MultipleContacts();
+		ob.addContact();
+		ob.addContact();
+		ob.addContact();
 	}
 }
