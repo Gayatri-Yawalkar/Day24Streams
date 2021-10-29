@@ -19,4 +19,13 @@ public class Contacts {
 	public String getName() {
 		return firstLastName;
 	}
+	public String getCity() {
+		return city;
+	}
+	public String getState() {
+		return state;
+	}
+	public long getZip() {
+		return zip;
+	}
 }
